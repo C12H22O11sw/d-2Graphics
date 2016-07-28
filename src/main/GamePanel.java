@@ -10,7 +10,12 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener{
 Timer timer;
-GameObject gameObject = new GameObject(300,300,100,100,Color.RED);
+
+int searchX = 0;
+int searchY = 0;
+GameObject gameObjectOne = new GameObject("red square",300,300,150,150,Color.RED);
+GameObject gameObjectTwo = new GameObject("green square",100,300,200,100,Color.GREEN);
+GameObject gameObjectThree = new GameObject("blue square",300,100,100,200,Color.BLUE);
 
 
 
@@ -21,7 +26,11 @@ GamePanel(){
 	timer = new Timer(17,this);
 	timer.start();
 }
-
+int numberOfHits(){
+	return gameObjectOne.isThisObject(searchX,searchY) + 
+		   gameObjectTwo.isThisObject(searchX,searchY) + 
+		   gameObjectThree.isThisObject(searchX,searchY);
+}
 
 
 
@@ -30,7 +39,10 @@ GamePanel(){
 
 @Override 
 public void paintComponent(Graphics graphics){
-	gameObject.draw(graphics);
+	gameObjectOne.draw(graphics);
+	gameObjectTwo.draw(graphics);
+	gameObjectThree.draw(graphics);
+
 }
 
 
@@ -44,7 +56,9 @@ public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	//System.out.println("timing");
 	repaint();
-	gameObject.update();
+	gameObjectOne.update();
+	gameObjectTwo.update();
+	gameObjectThree.update();
 	
 }
 
